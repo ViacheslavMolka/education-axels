@@ -2,22 +2,41 @@ import React, { useState } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { FormControlLabel, Checkbox, TextField, Input, InputAdornment, IconButton, Button } from '@material-ui/core';
+import { FormControlLabel, Checkbox, TextField, InputAdornment, IconButton, Button } from '@material-ui/core';
 
 import LoginWrapper from '../style/loginStyled';
 
+
+const validate = values => {
+    const errors = {};
+    const requiredFields = ['username', 'email', 'password'];
+
+    requiredFields.forEach(field => {
+        if(!values[field]) {
+            errors[field] = 'Required!'
+        }
+    });
+
+    if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address'
+    };
+
+    return errors;
+};
 
 const RenderTextField = ({label, input, meta: { touched, invalid, error }}) => {
     return (
         <TextField
         label={label}
         placeholder={label}
+        error={touched && invalid}
+        helperText={touched && error}
         {...input}
     />
     )
 };
 
-const RenderPassword = ({ input, label }) => {
+const RenderPassword = ({ input, label, meta: { touched, invalid, error } }) => {
     const [visible, setVisible] = useState({
         showPassword: false
     });
@@ -26,21 +45,27 @@ const RenderPassword = ({ input, label }) => {
         setVisible({ showPassword: !visible.showPassword });
     };
     return (
-        <Input
+        <TextField
             id="pass"
+            label={label}
+            placeholder={label}
+            error={touched && invalid}
+            helperText={touched && error}
+            {...input}
             type={visible.showPassword ? 'text' : 'password'}
             onChange={input.onChange}
-            placeholder={label}
-            endAdornment={
-                <InputAdornment position="end">
-                <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                >
-                    {visible.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-                </InputAdornment>
-            }
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                    <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                    >
+                        {visible.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                    </InputAdornment>
+                )
+            }}
         />
     )
 };
@@ -80,4 +105,4 @@ const Login = (props) => {
     )
 };
   
-export default reduxForm({ form: 'login' })(Login)
+export default reduxForm({ form: 'login', validate })(Login);

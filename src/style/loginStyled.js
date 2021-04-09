@@ -7,13 +7,7 @@ width: 300px;
 & form .line div {
     width: 300px;
 }
-& form .password {
-    margin-top: 16px;
-}
-& form .password input[placeholder] {
-    color: #000;
-}
-& form .password div div{
+& form .password div div div{
     width: 40px;
 }
 `
