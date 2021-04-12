@@ -2,11 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import LoginPage from '../containers/loginPage';
-import ChartBar from './chartBar';
-import Header from './header';
+import { Header, SliderForCharts } from './index';
 
-import GlobalStyle from '../style/globalStyled';
-import AppWrapper from '../style/appStyled';
+import { AppWrapper, GlobalStyle } from '../style/index';
 
 
 const App = () => {
@@ -19,7 +17,7 @@ const App = () => {
           return <h1>Welcome to my education app!</h1>
         }}/>
         <Route path='/login/' component={LoginPage}/>
-        <Route path='/charts/' component={ChartBar}/>
+        <Route path='/charts/' component={SliderForCharts}/>
       </AppWrapper>
     </Router>
   );

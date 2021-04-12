@@ -31,9 +31,19 @@ const ChartBar = () => {
         <div>
             <Bar
                 data={data}
-                width={800}
-                height={400}
-                options={{ maintainAspectRatio: false }}
+                width={1200}
+                height={600}
+                options={{ 
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    } 
+                }}
             />
         </div>
     )

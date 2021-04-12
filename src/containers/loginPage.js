@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 
-import Login from '../components/login';
+import { Login } from '../components/index';
 
 import { login } from '../redux/index';
 

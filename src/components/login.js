@@ -4,7 +4,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { FormControlLabel, Checkbox, TextField, InputAdornment, IconButton, Button } from '@material-ui/core';
 
-import LoginWrapper from '../style/loginStyled';
+import { LoginWrapper } from '../style/index';
 
 
 const validate = values => {
